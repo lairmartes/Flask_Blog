@@ -1,9 +1,7 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegistrationForm, LoginForm
-
-app = Flask(__name__)
-
-app.config['SECRET_KEY'] = 'q2ep$25Swyct(H@kF9P2hrdKoXBT(Iy1MAZHFWWAM(M)9VNXiO6GY5$i443CM!SI'
+from flask import render_template, url_for, flash, redirect
+from flaskblog import app
+from flaskblog.models import User, Post
+from flaskblog.forms import RegistrationForm, LoginForm
 
 posts = [
 	{
@@ -19,6 +17,7 @@ posts = [
 		'date_posted': 'April 21st, 2018'
 	}
 ]
+
 
 @app.route("/")
 @app.route("/home")
@@ -52,7 +51,3 @@ def login():
 			flash('Login unsuccessful. Please check username and password.', 'danger')
 
 	return render_template('login.html', title='Login', form=form)
-
-
-if __name__ == '__main__':
-	app.run(debug=True)
